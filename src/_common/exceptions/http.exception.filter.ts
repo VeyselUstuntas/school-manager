@@ -3,6 +3,7 @@ import { ExceptionFilter, Catch, ArgumentsHost, HttpException } from '@nestjs/co
 import { Request, Response } from 'express';
 import { BaseResponse } from 'src/_base/response/base.response';
 import { ResponseMessages } from '../enums/Responsemessages.enum';
+import { DtoPrefix } from '../enums/validationMessage.enum';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -11,34 +12,45 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const response = ctx.getResponse<Response>();
         const request = ctx.getRequest<Request>();
         const status = exception.getStatus();
+        const dtoPrefix = Object.values(DtoPrefix);
+        const validationMessage = dtoPrefix.find(prefix => {
+            return (exception.message && exception.message.startsWith(prefix));
+        });
 
-        let responseMessage: ResponseMessages;
+        let responseMessage: string;
 
-        switch (status) {
-
-            case 404:
-                responseMessage = ResponseMessages.NOT_FOUND;
-                break;
-            case 401:
-                responseMessage = ResponseMessages.UNAUTHORIZATION;
-                break;
-            case 403:
-                responseMessage = ResponseMessages.FORBIDDEN;
-                break;
-            case 400:
-                responseMessage = ResponseMessages.BAD_REQUEST;
-                break;
-            case 500:
-                responseMessage = ResponseMessages.INTERNAL_SERVER_ERROR;
-                break;
-            case 502:
-                responseMessage = ResponseMessages.BAD_GATEWAY;
-                break;
-            default:
-                responseMessage = ResponseMessages.BAD_GATEWAY;
-                break;
-
+        if (validationMessage) {
+            responseMessage = exception.message;
         }
+        else {
+
+            switch (status) {
+
+                case 404:
+                    responseMessage = ResponseMessages.NOT_FOUND;
+                    break;
+                case 401:
+                    responseMessage = ResponseMessages.UNAUTHORIZATION;
+                    break;
+                case 403:
+                    responseMessage = ResponseMessages.FORBIDDEN;
+                    break;
+                case 400:
+                    responseMessage = ResponseMessages.BAD_REQUEST;
+                    break;
+                case 500:
+                    responseMessage = ResponseMessages.INTERNAL_SERVER_ERROR;
+                    break;
+                case 502:
+                    responseMessage = ResponseMessages.BAD_GATEWAY;
+                    break;
+                default:
+                    responseMessage = ResponseMessages.BAD_GATEWAY;
+                    break;
+
+            }
+        }
+
 
         response
             .status(status)
