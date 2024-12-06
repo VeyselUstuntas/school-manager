@@ -6,6 +6,4 @@ export enum ResponseMessages {
     UNAUTHORIZATION = 'UNAUTHORIZATION',
     FORBIDDEN = 'FORBIDDEN',
     BAD_REQUEST = 'BAD_REQUEST',
-
-
 }

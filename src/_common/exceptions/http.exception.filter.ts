@@ -13,6 +13,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const request = ctx.getRequest<Request>();
         const status = exception.getStatus();
         const dtoPrefix = Object.values(DtoPrefix);
+        
         const validationMessage = dtoPrefix.find(prefix => {
             return (exception.message && exception.message.startsWith(prefix));
         });
@@ -50,8 +51,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
             }
         }
-
-
         response
             .status(status)
             .json(new BaseResponse(null, responseMessage, false));

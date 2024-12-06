@@ -6,6 +6,8 @@ import { ValidationError } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // validation hataları için
   app.useGlobalPipes(new ValidationPipe({
     exceptionFactory: (errors: ValidationError[]) => {
       const findFirstError = (errors: ValidationError[]) => {
@@ -19,6 +21,8 @@ async function bootstrap() {
       return new BadRequestException(firstErr);
     }
   }));
+
+  // exception için
   app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(process.env.PORT ?? 3000);
 }
