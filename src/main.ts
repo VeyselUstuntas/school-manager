@@ -6,7 +6,7 @@ import { ValidationError } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.setGlobalPrefix('api');
   // validation hataları için
   app.useGlobalPipes(new ValidationPipe({
     exceptionFactory: (errors: ValidationError[]) => {

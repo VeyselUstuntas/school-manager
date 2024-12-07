@@ -9,6 +9,8 @@ import { RegisterRequestDto } from './dto/request/Register.request.dto';
 import { UserTypes } from 'src/_common/enums/UserTypes.enum';
 import { RegisterResponse, RegisterResponseDto } from './dto/response/Register.response.dto';
 import { ParentMapper } from 'src/_common/mapper/Parent.mapper';
+import { ManagerMapper } from 'src/_common/mapper/Manager.mapper';
+import { Manager, Parent } from 'src/_common/typeorm';
 
 @Controller('auth')
 export class AuthController {
@@ -18,14 +20,27 @@ export class AuthController {
     async login(@Body() body: LoginRequestDto, @Res() res: Response<LoginResponseDto>): Promise<void> {
         try {
             const result: { user: any, accessToken: string, refreshToken: string } = await this.authService.login(body);
-            res.json(new BaseResponse(
-                {
-                    user: ParentMapper.toUserDto(result.user),
-                    refreshToken: result.refreshToken,
-                    accessToken: result.accessToken
-                },
-                ResponseMessages.SUCCESS,
-                true));
+            if (result.user instanceof Manager) {
+                res.json(new BaseResponse(
+                    {
+                        user: ManagerMapper.toUserDto(result.user),
+                        refreshToken: result.refreshToken,
+                        accessToken: result.accessToken
+                    },
+                    ResponseMessages.SUCCESS,
+                    true));
+            }
+            else if (result.user instanceof Parent) {
+                res.json(new BaseResponse(
+                    {
+                        user: ParentMapper.toUserDto(result.user),
+                        refreshToken: result.refreshToken,
+                        accessToken: result.accessToken
+                    },
+                    ResponseMessages.SUCCESS,
+                    true));
+            }
+
         }
         catch (ex) {
             console.error(ex);
@@ -40,14 +55,28 @@ export class AuthController {
                 throw new BadGatewayException(ResponseMessages.USER_TYPE_NOT_VALID_FOR_REGISTER);
 
             const result: { user: any, accessToken: string, refreshToken: string } = await this.authService.register(body);
-            res.json(new BaseResponse(
-                {
-                    user: ParentMapper.toUserDto(result.user),
-                    refreshToken: result.refreshToken,
-                    accessToken: result.accessToken
-                },
-                ResponseMessages.SUCCESS,
-                true));
+
+            if (result.user instanceof Manager) {
+                res.json(new BaseResponse(
+                    {
+                        user: ManagerMapper.toUserDto(result.user),
+                        refreshToken: result.refreshToken,
+                        accessToken: result.accessToken
+                    },
+                    ResponseMessages.SUCCESS,
+                    true));
+            }
+            else if (result.user instanceof Parent) {
+                res.json(new BaseResponse(
+                    {
+                        user: ParentMapper.toUserDto(result.user),
+                        refreshToken: result.refreshToken,
+                        accessToken: result.accessToken
+                    },
+                    ResponseMessages.SUCCESS,
+                    true));
+            }
+
         } catch (ex) {
             throw ex;
         }
