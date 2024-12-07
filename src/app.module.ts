@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseConfig } from './_common/config';
+import { ParentModule } from './parent/parent.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { DatabaseConfig } from './_common/config';
       inject:[ConfigService]
 
     }),
+    ParentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
