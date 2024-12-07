@@ -6,16 +6,16 @@ import { Student } from "./Student";
 export class Class extends BaseEntity {
 
     @Column({ type: 'varchar', length: 50 })
-    public name: string;
+    name: string;
 
     @Column({ type: 'varchar', length: 15 })
-    public code: string;
+    code: string;
 
     @Column({ type: 'varchar', length: 200 })
-    public description: string;
+    description: string;
 
     @OneToMany(() => Student, (student) => student.class)
-    public students: Student[];
+    students: Student[];
 
     //teacher
     // @ManyToMany(() => Teacher, (teacher) => teacher.class)

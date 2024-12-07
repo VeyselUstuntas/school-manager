@@ -1,14 +1,15 @@
 import { BaseResponse } from "src/_base/response/base.response";
 import { UserResponse } from "src/_common/response/User.response";
 
-export class LoginResponse {
+export class RegisterResponse {
     accessToken: string;
     refreshToken: string;
-    user : UserResponse;
+    user: UserResponse;
+
 }
 
-export class LoginResponseDto extends BaseResponse<LoginResponse> {
-    data: LoginResponse;
+export class RegisterResponseDto extends BaseResponse<RegisterResponse> {
+    data: RegisterResponse;
     message: string;
     success: boolean;
 }

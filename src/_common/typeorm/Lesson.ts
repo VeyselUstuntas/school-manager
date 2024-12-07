@@ -3,10 +3,10 @@ import { Entity, OneToMany } from "typeorm";
 import { Exam } from "./Exam";
 
 @Entity()
-export class Lesson extends BaseEntity{
+export class Lesson extends BaseEntity {
 
-    public name : string;
+    name: string;
 
-    @OneToMany(()=> Exam, (exam) => exam.lesson)
-    public exams : Exam[];
+    @OneToMany(() => Exam, (exam) => exam.lesson)
+    exams: Exam[];
 }

@@ -7,15 +7,15 @@ import { ExamResult } from "./ExamResult";
 export class Exam extends BaseEntity {
 
     @Column()
-    public name: string;
+    name: string;
 
     @ManyToOne(() => Lesson, (lesson) => lesson.exams)
-    public lesson: Lesson;
+    lesson: Lesson;
 
     @Column({ type: 'timestamp', nullable: true })
-    public date: Date;
+    date: Date;
 
     @OneToMany(() => ExamResult, (examResult) => examResult.exam)
-    public results: ExamResult[];
+    results: ExamResult[];
 
 }

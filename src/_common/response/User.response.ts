@@ -1,5 +1,7 @@
 export class UserResponse {
+    id: number;
     name: string;
-    lastName: string;
-
+    lastname: string;
+    phone: string;
+    email: string;
 }

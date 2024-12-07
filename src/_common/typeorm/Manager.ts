@@ -4,18 +4,18 @@ import { Column, Entity } from "typeorm";
 @Entity()
 export class Manager extends BaseEntity {
     @Column({ type: 'varchar', length: 150, nullable: false })
-    public email: string;
+    email: string;
 
     @Column({ type: 'varchar', length: 150, nullable: false })
-    public name: string;
+    name: string;
 
     @Column({ type: 'varchar', length: 150, nullable: false })
-    public lastName: string;
+    lastname: string;
 
     @Column({ type: 'varchar', length: 50, nullable: false, comment: 'Format = 0905051232323' })
-    public phone: string;
+    phone: string;
 
     @Column({ type: 'varchar', length: 200, nullable: false })
-    public password: string;
+    password: string;
 
 }

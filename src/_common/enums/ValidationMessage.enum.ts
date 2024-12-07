@@ -1,9 +1,12 @@
 export enum DtoPrefix {
     NAME = 'NAME',
     LASTNAME = 'LASTNAME',
+    EMAIL = 'EMAIL',
+    PHONE = 'PHONE',
     IDENTITY_NUMBER = 'IDENTITY_NUMBER',
     EMAIL_OR_PHONE = 'EMAIL_OR_PHONE',
-    PASSWORD = 'PASSWORD'
+    PASSWORD = 'PASSWORD',
+    USER_TYPE = 'USER_TYPE'
 }
 
 
@@ -13,7 +16,8 @@ export enum ValidationType {
     MUST_BE_STRING = 'MUST_BE_STRING',
     MAX_LENGTH = 'MAX_LENGTH',
     MIN_LENGTH = 'MIN_LENGTH',
-    NOT_STRONG = 'NOT_STRONG'
+    NOT_STRONG = 'NOT_STRONG',
+    NOT_VALID = 'NOT_VALID'
 }
 
 export function getValidationMessage(prefix: DtoPrefix, validationType: ValidationType, ...args: any): string {

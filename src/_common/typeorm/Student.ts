@@ -9,24 +9,24 @@ import { ExamResult } from "./ExamResult";
 export class Student extends BaseEntity {
 
     @Column({ type: 'varchar', length: 50, nullable: false })
-    public firstName: string;
+    name: string;
 
     @Column({ type: 'varchar', length: 50, nullable: false })
-    public lastName: string;
+    lastname: string;
 
     @Column({ type: 'timestamp', nullable: true })
-    public dateOfBirth: Date;
+    dateOfBirth: Date;
 
     @Column({ type: 'enum', default: StudentStatus.ACTIVE, enum: StudentStatus })
-    public status: StudentStatus;
+    status: StudentStatus;
 
     @ManyToOne(() => Class, (classes) => classes.students)
-    public class: Class;
+    class: Class;
 
     @ManyToMany(() => Parent, (parent) => parent.students)
-    public parents: Parent[];
+    parents: Parent[];
 
-    @OneToMany(() => ExamResult , (examResult) => examResult.student)
-    public examResults : ExamResult[];
+    @OneToMany(() => ExamResult, (examResult) => examResult.student)
+    examResults: ExamResult[];
 
 }
