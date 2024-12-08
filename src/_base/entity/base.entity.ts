@@ -2,15 +2,15 @@ import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, Timestamp, 
 
 export abstract class BaseEntity {
     @PrimaryGeneratedColumn()
-    public id: number;
+    id: number;
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
-    public createdAt: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)', onUpdate: ('CURRENT_TIMESTAMP(6)') })
-    public updatedAt: Date;
+    updatedAt: Date;
 
     @DeleteDateColumn({ type: 'timestamp', nullable: true })
-    public deletedAt: Date;
+    deletedAt: Date;
 
 }

@@ -6,6 +6,7 @@ import { ValidationError } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  //api prefix'i eklendi
   app.setGlobalPrefix('api');
   // validation hataları için
   app.useGlobalPipes(new ValidationPipe({
@@ -13,7 +14,7 @@ async function bootstrap() {
       const findFirstError = (errors: ValidationError[]) => {
         for (let error of errors) {
           if (error.constraints) {
-            return Object.values(error.constraints)[0];
+            return Object.values(error.constraints)[0]; // amac ilk hatayı yakalamak ve tek bir hata döndürmek bunu dizi haline getirdik
           }
         }
       }
@@ -22,7 +23,7 @@ async function bootstrap() {
     }
   }));
 
-  // exception için
+  // exceptionları filterlemek-işlemek için 
   app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(process.env.PORT ?? 3000);
 }

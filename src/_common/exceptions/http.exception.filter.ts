@@ -13,6 +13,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const request = ctx.getRequest<Request>();
         const status = exception.getStatus();
         const dtoPrefix = Object.values(DtoPrefix);
+
+        // burdaki amac gelen hatada bir validataion hatası var mı yok mu diye kontrol edilmseidir. validation hatası yoksa diğer hatalar bastırılr.
+        
+        // dtoPrefix ile başlıyorsa bu validation hatasıdır. 
         
         const validationMessage = dtoPrefix.find(prefix => {
             return (exception.message && exception.message.startsWith(prefix));
