@@ -12,9 +12,10 @@ import { JwtPayload } from 'src/_common/payloads/Jwt.payload';
 import { ManagerService } from 'src/manager/manager.service';
 
 @Injectable()
-export class AuthService {  
+export class AuthService {
 
     constructor(
+        // forwardRef iç içe modül kullanımlarında çakışmaları önler. gerektiği zaman bağımlılıkları enjetke eder.
         @Inject(forwardRef(() => ParentService)) private readonly parentService: ParentService,
         @Inject(forwardRef(() => ManagerService)) private readonly managerService: ManagerService,
         private readonly jwtService: JwtService
@@ -45,7 +46,7 @@ export class AuthService {
 
         }
         else {
-            throw new NotFoundException(ResponseMessages.PASSWORD_OR_EMAIL_WRONG)
+            throw new NotFoundException(ResponseMessages.PASSWORD_OR_EMAIL_WRONG);
         }
     }
 

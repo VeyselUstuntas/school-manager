@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { privateDecrypt } from 'crypto';
 import { Parent } from 'src/_common/typeorm';
 import { Repository } from 'typeorm';
 
@@ -19,6 +18,7 @@ export class ParentService {
         return parent;
     }
 
+    // kayıt için aymı email kontrolü 
     async isEmailAvailable(email: string): Promise<boolean> {
         const parentEmail = await this.parentRepo.exists({ where: { email: email }, withDeleted: true });
         return parentEmail;

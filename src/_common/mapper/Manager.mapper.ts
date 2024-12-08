@@ -1,3 +1,4 @@
+import { UserTypes } from "../enums/UserTypes.enum";
 import { UserResponse } from "../response/User.response";
 import { Manager } from "../typeorm";
 
@@ -9,6 +10,7 @@ export class ManagerMapper{
         userResponse.phone = manager.phone;
         userResponse.name = manager.name;
         userResponse.lastname = manager.lastname;
+        userResponse.type = UserTypes.MANAGER;
         return userResponse;
     }
 }

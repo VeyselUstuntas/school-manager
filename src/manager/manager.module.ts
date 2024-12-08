@@ -7,7 +7,7 @@ import { Manager } from 'src/_common/typeorm';
 @Module({
   controllers: [ManagerController],
   providers: [ManagerService],
-  exports: [ManagerService],
-  imports: [TypeOrmModule.forFeature([Manager])]
+  exports: [ManagerService], // authmodule içinde kullanım için export ettik.
+  imports: [TypeOrmModule.forFeature([Manager])] // typeorm entitiy kullanımı için repo tanıtımı
 })
 export class ManagerModule { }

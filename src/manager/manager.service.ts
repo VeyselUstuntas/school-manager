@@ -5,9 +5,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ManagerService {
-
     constructor(@InjectRepository(Manager) private readonly managerRepo: Repository<Manager | null>) { }
-
 
     async findManagerForLogin(emailOrPhone: string, isEmail: boolean): Promise<Manager | null> {
         let manager: Manager;
@@ -36,6 +34,4 @@ export class ManagerService {
         const newManager = this.managerRepo.create(data);
         return await this.managerRepo.save(newManager);
     }
-
-
 }
